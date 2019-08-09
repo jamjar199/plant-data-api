@@ -16,5 +16,5 @@ interface PlantRepositoryInterface
      *
      * @return Collection
      */
-    public function all() : Collection ;
+    public function all() : Collection;
 }
