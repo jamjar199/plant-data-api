@@ -1,7 +1,5 @@
 <?php
 
-use App\Services\DataRecorderService;
-
 class DataRecorderServiceTest extends TestCase
 {
     /**
@@ -65,6 +63,21 @@ class DataRecorderServiceTest extends TestCase
         $this->assertResponseStatus('422');
         $this->assertJson(json_encode([
             'data' => 'The data field is required'
+        ]));
+    }
+
+    public function testRequestDataInvalid()
+    {
+        $requestBody =  $this->getTestData();
+        $requestBody['data'] = [
+            'light' => 120
+        ];
+
+        $this->post('/data', $requestBody);
+
+        $this->assertResponseStatus('200');
+        $this->assertJson(json_encode([
+            'message' => true
         ]));
     }
 

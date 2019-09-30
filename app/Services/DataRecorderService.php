@@ -15,7 +15,9 @@ class DataRecorderService
 
         foreach ($sensorsData as $key => $sensorData) {
             $strategy = $this->getSensorStrategy($key);
-            $strategy->saveData($sensorData, $plantId, $sensorId);
+            if ($strategy !== false) {
+                $strategy->saveData($sensorData, $plantId, $sensorId);
+            }
         }
     }
 
