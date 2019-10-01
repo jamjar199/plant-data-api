@@ -87,8 +87,11 @@ class DataRecorderServiceTest extends TestCase
     public function testRequestSuccessful()
     {
         $requestBody =  $this->getTestData();
-
         $this->post('/data', $requestBody);
+
+        $mockTemperature = Mockery::mock('Temperature');
+        $mockTemperature->shouldReceive('save')->andReturn(true);
+        $this->app->instance('Temperature', $mockTemperature);
 
         $this->assertResponseStatus('200');
         $this->assertJson(json_encode([
