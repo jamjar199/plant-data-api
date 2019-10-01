@@ -2,6 +2,9 @@ build:
   nodes:
     coverage:
       tests:
+        environment:
+          php:
+            version: 7.2.13
         override:
           - command: vendor/bin/phpunit --coverage-clover coverage.xml
             coverage:
