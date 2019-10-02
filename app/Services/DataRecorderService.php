@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\TemperatureRepository;
 use App\Strategies\TemperatureStrategy;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class DataRecorderService
     {
         switch ($sensorType) {
             case 'temperature':
-                return new TemperatureStrategy();
+                return new TemperatureStrategy(new TemperatureRepository);
                 break;
             default:
                 return false;

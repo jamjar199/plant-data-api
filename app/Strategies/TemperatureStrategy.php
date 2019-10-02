@@ -2,10 +2,22 @@
 
 namespace App\Strategies;
 
-use App\Temperature;
+use App\Repositories\TemperatureRepository;
 
 class TemperatureStrategy implements DataStrategyInterface
 {
+    /** @var TemperatureRepository $temperatureRepository */
+    private $temperatureRepository;
+
+    /**
+     * TemperatureStrategy constructor.
+     * @param TemperatureRepository $temperatureRepository
+     */
+    public function __construct(TemperatureRepository $temperatureRepository)
+    {
+        $this->temperatureRepository = $temperatureRepository;
+    }
+
     /**
      * @param $data
      * @param $plantId
@@ -14,11 +26,11 @@ class TemperatureStrategy implements DataStrategyInterface
      */
     public function saveData($data, $plantId, $sensorId): bool
     {
-        $temperature = new Temperature();
+        $temperature = $this->temperatureRepository->create();
         $temperature->temperature = $data;
         $temperature->plant_id = $plantId;
         $temperature->sensor_id = $sensorId;
 
-        return $temperature->save();
+        return $this->temperatureRepository->save($temperature);
     }
 }

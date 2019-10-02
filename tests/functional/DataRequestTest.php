@@ -1,13 +1,13 @@
 <?php
 
-class DataRecorderServiceTest extends TestCase
+class DataRequestTest extends TestCase
 {
     /**
      * Test Request fails when missing the plant field in the json
      */
     public function testRequestMissingPlantIdFails()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         unset($requestBody['plant']);
 
         $this->post('/data', $requestBody);
@@ -23,7 +23,7 @@ class DataRecorderServiceTest extends TestCase
      */
     public function testRequestMissingSensorIdFails()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         unset($requestBody['sensor']);
 
         $this->post('/data', $requestBody);
@@ -39,7 +39,7 @@ class DataRecorderServiceTest extends TestCase
      */
     public function testRequestMissingDataFails()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         unset($requestBody['data']);
 
         $this->post('/data', $requestBody);
@@ -55,7 +55,7 @@ class DataRecorderServiceTest extends TestCase
      */
     public function testRequestDataEmpty()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         $requestBody['data'] = null;
 
         $this->post('/data', $requestBody);
@@ -66,9 +66,12 @@ class DataRecorderServiceTest extends TestCase
         ]));
     }
 
+    /**
+     * Test extra data in requests is ignored
+     */
     public function testRequestDataInvalid()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         $requestBody['data'] = [
             'light' => 120
         ];
@@ -86,12 +89,8 @@ class DataRecorderServiceTest extends TestCase
      */
     public function testRequestSuccessful()
     {
-        $requestBody =  $this->getTestData();
+        $requestBody = $this->getTestData();
         $this->post('/data', $requestBody);
-
-        $mockTemperature = Mockery::mock('Temperature');
-        $mockTemperature->shouldReceive('save')->andReturn(true);
-        $this->app->instance('Temperature', $mockTemperature);
 
         $this->assertResponseStatus('200');
         $this->assertJson(json_encode([
