@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Plant;
+use App\Repositories\Interfaces\PlantRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
  *
  * @package App\Repositories
  */
-class PlantRepository
+class PlantRepository implements PlantRepositoryInterface
 {
     /**
      * Get all plants
