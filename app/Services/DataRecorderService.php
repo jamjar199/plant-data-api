@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class DataRecorderService
 {
+    /**
+     * @param Request $request
+     */
     public function save(Request $request)
     {
         $sensorsData = $request->get('data');
@@ -22,6 +25,10 @@ class DataRecorderService
         }
     }
 
+    /**
+     * @param $sensorType
+     * @return TemperatureStrategy|bool
+     */
     private function getSensorStrategy($sensorType)
     {
         switch ($sensorType) {
