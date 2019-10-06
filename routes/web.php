@@ -19,3 +19,8 @@ $router->post('/data', [
     'as' => 'data',
     'uses' => 'DataRecorderController@recordData'
 ]);
+
+$router->get('/plant/{id}/temperature', [
+    'as' => 'temperature',
+    'uses' => 'DataRetrieverController@getTemperature'
+]);
