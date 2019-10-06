@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Temperature;
+use Illuminate\Database\Eloquent\Collection;
 
 class TemperatureRepository
 {
@@ -21,5 +22,14 @@ class TemperatureRepository
     public function save(Temperature $temperature)
     {
         return $temperature->save();
+    }
+
+    /**
+     * @param $id
+     * @return Collection
+     */
+    public function findByPlantId($id)
+    {
+        return Temperature::where('plant_id', $id)->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Strategies;
 
 use App\Repositories\TemperatureRepository;
+use Illuminate\Support\Collection;
 
 class TemperatureStrategy implements DataStrategyInterface
 {
@@ -32,5 +33,14 @@ class TemperatureStrategy implements DataStrategyInterface
         $temperature->sensor_id = $sensorId;
 
         return $this->temperatureRepository->save($temperature);
+    }
+
+    /**
+     * @param $id
+     * @return Collection
+     */
+    public function getData($id)
+    {
+        return $this->temperatureRepository->findByPlantId($id);
     }
 }
