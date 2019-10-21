@@ -24,3 +24,8 @@ $router->get('/plant/{id}/temperature', [
     'as' => 'temperature',
     'uses' => 'DataRetrieverController@getTemperature'
 ]);
+
+$router->get('/plant/{id}', [
+    'as' => 'plant',
+    'uses' => 'PlantController@getPlant'
+]);
