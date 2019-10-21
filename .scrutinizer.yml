@@ -1,19 +1,9 @@
-filter:
-  excluded_paths:
-    - 'tests/*'
-checks:
-  php: true
 build:
-  environment:
-    php:
-      version: 7.2
-  dependencies:
-    before:
-      - composer require phpunit/phpunit:^7.0 --dev
-  tests:
-    override:
-      -
-        command: vendor/bin/phpunit --coverage-clover=clover.xml
-        coverage:
-          file: clover.xml
-          format: php-clover
+  nodes:
+    coverage:
+      tests:
+        override:
+          - command: vendor/bin/phpunit --coverage-clover coverage.xml
+            coverage:
+              file: coverage.xml
+              format: clover
