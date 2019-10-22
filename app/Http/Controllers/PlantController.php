@@ -7,13 +7,13 @@ use App\Plant;
 class PlantController
 {
     /**
-     * @param Plant $plant
+     * @param int $plantId
      * @return \Illuminate\Http\JsonResponse
      */
     public function getPlant($plantId)
     {
-        $plant = Plant::findOrFail($plantId);
-
-        return response()->json($plant, 200);
+        return response()->json(
+            Plant::findOrFail($plantId), 200
+        );
     }
 }
