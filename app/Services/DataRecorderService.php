@@ -34,7 +34,6 @@ class DataRecorderService
         switch ($sensorType) {
             case 'temperature':
                 return new TemperatureStrategy(new TemperatureRepository);
-                break;
             default:
                 return false;
         }
